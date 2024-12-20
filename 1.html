@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+        }
+
+        /* Top Navigation Bar */
+        .navbar {
+            background-color: #04D1FF;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center; /* This centers the content horizontally */
+            align-items: center; /* This vertically centers the content */
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar h1 {
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .navbar .user-info {
+            font-size: 16px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            margin: 0 10px;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        .navbar a:hover {
+            background-color: #45a049;
+        }
+
+        /* Sidebar Section */
+        .sidebar {
+            background-color: #2d3e50;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            top: 50px; /* Just below the navbar */
+            left: 0;
+            right: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            z-index: 900;
+        }
+
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #45a049;
+        }
+
+        /* Main Content Section */
+        .main-content {
+            padding: 80px 30px 30px 30px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            font-size: 16px;
+        }
+
+        .button {
+            padding: 10px 15px;
+            background-color: #04D1FF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #007BFF;
+        }
+
+        /* Footer Section */
+        footer {
+            background-color: #2d3e50;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+    <div class="navbar">
+        <h1>Learning Management System</h1>
+        <div class="user-info">
+            <span>Welcome, <?php echo htmlspecialchars($userName); ?></span>
+            <a href="logout.php">Logout</a>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="#">Dashboard</a>
+        <a href="#">My Courses</a>
+        <a href="#">Assignments</a>
+        <a href="#">Profile</a>
+        <a href="#">Settings</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="card">
+            <h2>Welcome to Your Dashboard</h2>
+            <p>Here, you can find all your courses, assignments, and more.</p>
+        </div>
+
+        <div class="card">
+            <h2>My Courses</h2>
+            <p>View all the courses you are enrolled in and start learning!</p>
+            <button class="button">Go to My Courses</button>
+        </div>
+
+        <div class="card">
+            <h2>Assignments</h2>
+            <p>Check the latest assignments and start working on them.</p>
+            <button class="button">View Assignments</button>
+        </div>
+
+        <div class="card">
+            <h2>Profile Settings</h2>
+            <p>Update your profile information, change your password, and manage your preferences.</p>
+            <button class="button">Edit Profile</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Learning Management System. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
