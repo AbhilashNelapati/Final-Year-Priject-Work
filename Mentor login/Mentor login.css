@@ -1,0 +1,142 @@
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(to bottom, #04D1FF, #ffffff);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f4f8;
+}
+
+.login-container {
+    
+    width: 90%; /* Make the container take up most of the screen width */
+    display: flex; /* Flexbox to arrange form and image side by side */
+    justify-content: space-between; /* Ensure form and image are spaced apart */
+    align-items: center;
+    padding: 300px;
+    height: 100%; /* Full height */
+}
+.login-form {
+    height: auto;
+    width: 150%; /* Increased width */
+    max-width: 800px; /* Max width for large screens */
+    background: white;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    border-radius: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.login-form h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: row; /* Align label and input side by side */
+    justify-content: flex-start; /* Align elements to the left */
+    align-items: center;
+    width: 60%;
+    margin-bottom: 15px; /* Spacing between fields */
+}
+
+.login-form label {
+    font-weight: bold;
+    margin-right: 10px; /* Space between label and input */
+}
+
+.login-form input {
+    width: 100%;
+    padding: 10px;
+    margin: 0; /* Remove margin between input and label */
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    line-height: 1.5;
+}
+
+/* Password input should be below username input */
+.input-group.password-group {
+    flex-direction: row; /* Align label and input for password side by side */
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* Button styling */
+.login-form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 15px;
+    width: 60%;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-top: 15px; /* Space between button and password input */
+}
+
+.login-form button:hover {
+    background-color: #45a049;
+}
+
+
+.right-section {
+    width: 40%; /* Image section takes 40% width */
+    padding: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    
+}
+
+.right-section img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.right-section .welcome-text {
+    text-align: center;
+    color: #333;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.right-section .welcome-text h3 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.right-section .welcome-text p {
+    font-size: 16px;
+    color: #666;
+}
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+    .login-container {
+        flex-direction: column; /* Stack form and image on small screens */
+        width: 100%; /* Ensure full width */
+    }
+
+    .login-form {
+        width: 90%; /* Increase width for small screens */
+        padding: 20px;
+    }
+}
