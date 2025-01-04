@@ -18,14 +18,15 @@ body {
 }
 
 .login-container {
-    
-    width: 90%; /* Make the container take up most of the screen width */
-    display: flex; /* Flexbox to arrange form and image side by side */
-    justify-content: space-between; /* Ensure form and image are spaced apart */
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    padding: 300px;
-    height: 100%; /* Full height */
+    padding: 20px;
+    margin-left: 10%;  /* This will move the container slightly to the left */
+    height: 100%;
 }
+
 .login-form {
     height: auto;
     width: 150%; /* Increased width */
@@ -95,15 +96,14 @@ body {
     background-color: #45a049;
 }
 
-
 .right-section {
     width: 40%; /* Image section takes 40% width */
     padding: 35px;
     display: flex;
+    flex-direction: column; /* Align image and text vertically */
     justify-content: center;
     align-items: center;
     height: 100%;
-    
 }
 
 .right-section img {
@@ -116,7 +116,7 @@ body {
     text-align: center;
     color: #333;
     font-size: 20px;
-    margin-top: 20px;
+    margin-top: 20px; /* Space between image and text */
 }
 
 .right-section .welcome-text h3 {
