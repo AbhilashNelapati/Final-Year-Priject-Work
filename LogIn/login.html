@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f4f8;
+        }
+
+        .wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        /* Left section: 60% for the form */
+        .left-section {
+            width: 60%;
+            background: linear-gradient(to bottom, #04D1FF, #ffffff);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .left-section h2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .left-section input {
+            width: 80%;
+            padding: 12px;
+            margin: 10px 0;
+            margin-left: 10%;
+            border-radius: 25px;
+            border: 1px solid #ccc;
+        }
+
+        .left-section .login-btn {
+            background-color: #4CAF50;
+            margin-left:10%;
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 95%;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .left-section .login-btn:hover {
+            background-color: #45a049;
+        }
+
+        .left-section .signup-link {
+            width: 46%;
+            
+            margin: 25px 0;
+            margin-left: 25%;
+        }
+
+        .left-section .signup-link a {
+            color: #007BFF;
+            text-decoration: none;
+            width: 46%;
+            padding: 5px;
+            margin: 25px 0;
+            margin-left: 1%;
+        }
+
+        .left-section .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Right section: 40% for image and welcome content */
+        .right-section {
+            width: 40%;
+            background-color: #f0f4f8;
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .right-section img {
+            max-width: 100%;
+            height: 60%;
+            border-radius: 10px;
+        }
+
+        .right-section .welcome-text {
+            text-align: center;
+            color: #333;
+            font-size: 20px;
+            margin-top: 20px;
+        }
+
+        .right-section .welcome-text h3 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .right-section .welcome-text p {
+            font-size: 16px;
+        
+        }
+
+
+        @media (max-width: 768px) {
+            .wrapper {
+                flex-direction: column;
+            }
+
+            .left-section, .right-section {
+                width: 100%;
+                padding: 20px;
+            }
+
+            .right-section img {
+                max-width: 100%;
+                height: auto;
+            }
+        }      
+        .eye-icon, .email-icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Adjust the position of the email icon */
+        .email-icon {
+            right: 10px; /* Move the email icon to the right */
+        }
+
+        /* Adjust the position of the password visibility icons */
+        .eye-icon {
+            right: 10px; /* Move the password visibility icon to the right */
+        }
+
+        .input-container {
+            position: relative;
+            width: 80%;
+            margin: 10px 0;
+            margin-left: 10%;
+        }
+
+        input[type="email"], input[type="password"], input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 0;
+            border-radius: 25px;
+            border: 1px solid #ccc;
+            padding-right: 35px; /* Add space for the icons */
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <!-- Left Section: Login Form (60%) -->
+        <div class="left-section">
+            <h2>Login</h2>
+            <form id="signinForm">
+                <div class="input-container">
+                    <!-- Email input with icon inside -->
+                    <input type="email" id="signinemail" name="email" placeholder="Email" required>
+                    <img src="email.png" class="email-icon" alt="Email Icon">
+                </div>
+                <div class="input-container">
+                    <!-- Initially password input type is "password" -->
+                    <input type="password" id="signinpassword" name="password" placeholder="Password" required>
+                    <!-- Password visibility toggle icons -->
+                    <img src="password2.png" id="password2" class="eye-icon" alt="Show Password" onclick="togglePasswordVisibility()">
+                    <img src="password1.png" id="password1" class="eye-icon" alt="Hide Password" style="display:none" onclick="togglePasswordVisibility()">
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+            <div class="signup-link">
+                <p>Don't have an account? <a href="signup.html">SignUp here</a></p>
+            </div>
+        </div>
+
+        <!-- Right Section: Image and Welcome Content (40%) -->
+        <div class="right-section">
+            <img src="image for lms.jpeg" alt="Login Image">
+            <div class="welcome-text">
+                <h3>Welcome Back!</h3>
+                <p>We're glad to see you again. Login</p>
+            </div>
+        </div>
+    </div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyCUUyuTDhFelAx53elUquiAASa6BXTOVLw",
+        authDomain: "final-year-project-t-16.firebaseapp.com",
+        projectId: "final-year-project-t-16",
+        storageBucket: "final-year-project-t-16.firebasestorage.app",
+        messagingSenderId: "446310001725",
+        appId: "1:446310001725:web:ea307acade95404d71ce54"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const database = getFirestore(app);
+
+    const signinform = document.getElementById("signinForm");
+    signinform.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const signinemail = document.getElementById("signinemail").value.trim();
+        const signinpassword = document.getElementById("signinpassword").value.trim();
+
+        try {
+            // Authenticate user with Firebase Authentication
+            const userCredential = await signInWithEmailAndPassword(auth, signinemail, signinpassword);
+            window.location.href = "../Courses/Courses.html";
+        } catch (error) {
+            if (error.code === "auth/user-not-found") {
+                alert("No user found with this email.");
+            } else if (error.code === "auth/wrong-password") {
+                alert("Incorrect password. Please try again.");
+            } else {
+                alert("Error signing in: " + error.message);
+            }
+        }
+    });
+
+    // Function to toggle password visibility
+    function togglePasswordVisibility() {
+        const passwordField = document.getElementById("signinpassword");
+        const password1Icon = document.getElementById("password1");
+        const password2Icon = document.getElementById("password2");
+
+        if (passwordField.type === "password") {
+            passwordField.type = "text";  // Show password
+            password1Icon.style.display = "block";  // Show the "visible" icon
+            password2Icon.style.display = "none";  // Hide the "hidden" icon
+        } else {
+            passwordField.type = "password";  // Hide password
+            password1Icon.style.display = "none";  // Hide the "visible" icon
+            password2Icon.style.display = "block";  // Show the "hidden" icon
+        }
+    }
+</script>
+
+</html>
