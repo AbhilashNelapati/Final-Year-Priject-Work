@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -40,7 +40,6 @@
         }
 
         .left-section h2 {
-
             margin-bottom: 25px;
             width: 36%;
             padding: 10px;
@@ -49,13 +48,29 @@
             border-radius: 25px;
         }
 
-        .left-section input {
+        .input-container {
+            position: relative;
             width: 46%;
-            padding: 15px;
             margin: 10px 0;
             margin-left: 25%;
+        }
+
+        .left-section input {
+            width: 100%;
+            padding: 15px;
             border-radius: 25px;
             border: 1px solid #ccc;
+            padding-right: 40px; /* Space for the icon */
+        }
+
+        .eye-icon {
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
         }
 
         .left-section .signup-btn {
@@ -155,11 +170,26 @@
         <!-- Left Section: Form -->
         <div class="left-section">
             <h2>Sign Up</h2>
-            <form action="signup_action.php" method="POST" id="signupForm">
+            <form id="signupForm">
                 <input type="text" id="name" name="name" placeholder="Name" required>
                 <input type="email" id="email" name="email" placeholder="Email" required>
-                <input type="password" id="password" name="password" placeholder="Password" required>
-                <input type="password" id="confirmpassword" name="confirmpassword" placeholder="Confirm Password" required>
+                
+                <!-- Password Field for Signup -->
+                <div class="input-container">
+                    <input type="password" id="signupPassword" name="password" placeholder="Password" required>
+                    <!-- Password visibility toggle icons for signup -->
+                    <img src="password2.png" id="signupPasswordShow" class="eye-icon" alt="Show Password" onclick="togglePasswordVisibility('signupPassword', 'signupEyeIconShow', 'signupEyeIconHide')">
+                    <img src="password1.png" id="signupEyeIconHide" class="eye-icon" alt="Hide Password" style="display:none" onclick="togglePasswordVisibility('signupPassword', 'signupEyeIconShow', 'signupEyeIconHide')">
+                </div>
+            
+                <!-- Confirm Password Field for Signup -->
+                <div class="input-container">
+                    <input type="password" id="signupConfirmPassword" name="confirmpassword" placeholder="Confirm Password" required>
+                    <!-- Password visibility toggle icons for confirm password -->
+                    <img src="password2.png" id="signupConfirmPasswordShow" class="eye-icon" alt="Show Password" onclick="togglePasswordVisibility('signupConfirmPassword', 'signupConfirmEyeIconShow', 'signupConfirmEyeIconHide')">
+                    <img src="password1.png" id="signupConfirmEyeIconHide" class="eye-icon" alt="Hide Password" style="display:none" onclick="togglePasswordVisibility('signupConfirmPassword', 'signupConfirmEyeIconShow', 'signupConfirmEyeIconHide')">
+                </div>
+            
                 <button type="submit" class="signup-btn">Sign Up</button>
             </form>
             <div class="signup-link">
@@ -178,7 +208,6 @@
         </div>
     </div>
 
-</body>
 <script type="module">
 
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
@@ -197,44 +226,46 @@
 
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const database = getFirestore(app);
+    const auth = getAuth(app);
+    const database = getFirestore(app);
 
-        const signupForm = document.getElementById("signupForm");
-        signupForm.addEventListener("submit", async (e) => {
-            e.preventDefault();
+    const signupForm = document.getElementById("signupForm");
+    signupForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-            const name = document.getElementById("name").value;
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
 
-            try {
-                // Register user
-                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                const user = userCredential.user;
+        try {
+            // Register user
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
 
-                // Store user details in Firestore
-                await addDoc(collection(database, "studentdetails"), {
-                    uid: user.uid,
-                    name,
-                    email,
-                    password,
-                    createdAt: new Date(),
-                });
+            // Store user details in Firestore
+            await addDoc(collection(database, "studentdetails"), {
+                uid: user.uid,
+                name,
+                email,
+                password,
+                createdAt: new Date(),
+            });
 
-                alert("Registration Successful!");
-            } catch (error) {
-                if (error.code === 'auth/email-already-in-use') {
-                    alert('Email is already in use. Please use a different email.');
-                } else if (error.code === 'auth/invalid-email') {
-                    alert('Invalid email address.');
-                } else if (error.code === 'auth/weak-password') {
-                    alert('Weak password. Password must be at least 6 characters.');
-                } else {
-                    alert('An error occurred: ' + error.message);
-                }
+            alert("Registration Successful!");
+        } catch (error) {
+            if (error.code === 'auth/email-already-in-use') {
+                alert('Email is already in use. Please use a different email.');
+            } else if (error.code === 'auth/invalid-email') {
+                alert('Invalid email address.');
+            } else if (error.code === 'auth/weak-password') {
+                alert('Weak password. Password must be at least 6 characters.');
+            } else {
+                alert('An error occurred: ' + error.message);
             }
-        })
+        }
+    })
 </script>
+<script src="password.js"></script>
+</body>
 
 </html>
