@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,14 +30,17 @@
             background: linear-gradient(to bottom, #04D1FF, #ffffff);
             display: flex;
             flex-direction: column;
-            justify-content: center;  /* Center content vertically */
-            align-items: center;      /* Center content horizontally */
+            justify-content: center;
+            /* Center content vertically */
+            align-items: center;
+            /* Center content horizontally */
             padding: 20px;
-            height: 100%;  /* Full height */
+            height: 100%;
+            /* Full height */
         }
 
         .left-section h2 {
-            
+
             margin-bottom: 25px;
             width: 36%;
             padding: 10px;
@@ -56,7 +60,7 @@
 
         .left-section .signup-btn {
             background-color: #4CAF50;
-            margin-left:25%;
+            margin-left: 25%;
             color: white;
             border: none;
             padding: 20px;
@@ -131,7 +135,8 @@
                 flex-direction: column;
             }
 
-            .left-section, .right-section {
+            .left-section,
+            .right-section {
                 width: 100%;
                 padding: 20px;
             }
@@ -143,33 +148,95 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="wrapper">
         <!-- Left Section: Form -->
-        <div class="left-section">
-            <h2>Sign Up</h2>
-            <form action="signup_action.php" method="POST">
-                <input type="text" name="name" placeholder="Name" required>
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="password" name="password" placeholder="Password" required>
-                <input type="password" name="confirm_password" placeholder="Confirm Password" required>
-                <button type="submit" class="signup-btn">Sign Up</button>
-            </form>
-            <div class="signup-link">
-                <p>Already have an account? <a href="login.html"><u>LogIn Here</u></a></p>
+        <div class="container">
+            <!-- Left Section: Form -->
+            <div class="left-section">
+                <h2>Sign Up</h2>
+                <form id="signupForm">
+                    <input type="text" id="name" name="name" placeholder="Name" required>
+                    <input type="email" id="email" name="email" placeholder="Email" required>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                    <input type="password" id="confirmpassword" name="confirmpassword" placeholder="Confirm Password" required>
+                    <button type="submit" class="signup-btn">Sign Up</button>
+                </form>
+                <div class="signup-link">
+                    <p>Already have an account? <a href="login.html"><u>Log In Here</u></a></p>
+                </div>
+            </div>
+    
+            <!-- Right Section: Image and Welcome Content -->
+            <div class="right-section">
+                <img src="image_for_lms.jpeg" alt="Signup Image">
+                <div class="welcome-text">
+                    <h3>Welcome to Our Platform!</h3>
+                    <p>Join us today and start exploring amazing features. Whether you're new or returning, we're happy to
+                        have you with us!</p>
+                </div>
             </div>
         </div>
-
-        <!-- Right Section: Image and Welcome Content -->
-        <div class="right-section">
-            <img src="image for lms.jpeg" alt="Signup Image">
-            <div class="welcome-text">
-                <h3>Welcome to Our Platform!</h3>
-                <p>Join us today and start exploring amazing features. Whether you're new or returning, we're happy to have you with us!</p>
-            </div>
-        </div>
-    </div>
 
 </body>
+<script type="module">
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyCUUyuTDhFelAx53elUquiAASa6BXTOVLw",
+        authDomain: "final-year-project-t-16.firebaseapp.com",
+        projectId: "final-year-project-t-16",
+        storageBucket: "final-year-project-t-16.firebasestorage.app",
+        messagingSenderId: "446310001725",
+        appId: "1:446310001725:web:ea307acade95404d71ce54"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const database = getFirestore(app);
+
+        const signupForm = document.getElementById("signupForm");
+        signupForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            try {
+                // Register user
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                // Store user details in Firestore
+                await addDoc(collection(database, "studentdetails"), {
+                    uid: user.uid,
+                    name,
+                    email,
+                    password,
+                    createdAt: new Date(),
+                });
+
+                alert("Registration Successful!");
+            } catch (error) {
+                if (error.code === 'auth/email-already-in-use') {
+                    alert('Email is already in use. Please use a different email.');
+                } else if (error.code === 'auth/invalid-email') {
+                    alert('Invalid email address.');
+                } else if (error.code === 'auth/weak-password') {
+                    alert('Weak password. Password must be at least 6 characters.');
+                } else {
+                    alert('An error occurred: ' + error.message);
+                }
+            }
+        })
+</script>
+
 </html>

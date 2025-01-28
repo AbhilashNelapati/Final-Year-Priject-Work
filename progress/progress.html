@@ -1,0 +1,27 @@
+<!-- Progress Page -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Progress</title>
+    <link rel="stylesheet" href="progress.css">
+</head>
+<body>
+    <header class="progress-header">
+        <h1>Course Progress</h1>
+        <button onclick="goBack()">Back to Courses</button>
+    </header>
+
+    <div class="progress-container" id="courses">
+        <!-- Dynamic content will be rendered here -->
+    </div>
+
+    <script>
+        function goBack() {
+            window.location.href = "progress.html";
+        }
+    </script>
+    <script src="progress.js"></script>
+</body>
+</html>
