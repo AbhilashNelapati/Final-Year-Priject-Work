@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 document.addEventListener("DOMContentLoaded", function () {
     // Password visibility toggle
     function togglePasswordVisibility(inputId, iconId) {
@@ -18,3 +19,21 @@ document.addEventListener("DOMContentLoaded", function () {
     togglePasswordVisibility("password", "eye-icon1");
     togglePasswordVisibility("confirmpassword", "eye-icon2");
 });
+=======
+// Function to toggle password visibility
+function togglePasswordVisibility(passwordFieldId, showIconId, hideIconId) {
+    const passwordField = document.getElementById(passwordFieldId);
+    const showIcon = document.getElementById(showIconId);
+    const hideIcon = document.getElementById(hideIconId);
+
+    if (passwordField.type === "password") {
+        passwordField.type = "text";  // Show password
+        showIcon.style.display = "block";  // Show the "visible" icon
+        hideIcon.style.display = "none";  // Hide the "hidden" icon
+    } else {
+        passwordField.type = "password";  // Hide password
+        showIcon.style.display = "none";  // Hide the "visible" icon
+        hideIcon.style.display = "block";  // Show the "hidden" icon
+    }
+}
+>>>>>>> e0ea090 (updated codes)
