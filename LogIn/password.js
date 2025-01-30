@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 document.addEventListener("DOMContentLoaded", function () {
     // Password visibility toggle
     function togglePasswordVisibility(inputId, iconId) {
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     togglePasswordVisibility("password", "eye-icon1");
     togglePasswordVisibility("confirmpassword", "eye-icon2");
 });
-=======
+
 // Function to toggle password visibility
 function togglePasswordVisibility(passwordFieldId, showIconId, hideIconId) {
     const passwordField = document.getElementById(passwordFieldId);
@@ -36,4 +36,3 @@ function togglePasswordVisibility(passwordFieldId, showIconId, hideIconId) {
         hideIcon.style.display = "block";  // Show the "hidden" icon
     }
 }
->>>>>>> e0ea090 (updated codes)

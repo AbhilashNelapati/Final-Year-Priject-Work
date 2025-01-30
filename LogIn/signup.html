@@ -1,4 +1,4 @@
-<!<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -31,12 +31,9 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            /* Center content vertically */
             align-items: center;
-            /* Center content horizontally */
             padding: 20px;
             height: 100%;
-            /* Full height */
         }
 
         .left-section h2 {
@@ -48,28 +45,31 @@
             border-radius: 25px;
         }
 
+        /* Input container to ensure the input field and the eye icon are aligned */
         .input-container {
             position: relative;
-            width: 46%;
             margin: 10px 0;
-            margin-left: 25%;
+            width: 100%; /* Full width for the input container */
         }
 
-        .left-section input {
-            width: 100%;
-            padding: 15px;
+        /* Adjusting the width and padding of the input fields to reduce space */
+        .input-container input {
+            width: 100%; /* Full width */
+            padding: 15px 45px 15px 15px; /* Add padding to the right for the icon */
             border-radius: 25px;
             border: 1px solid #ccc;
-            padding-right: 40px; /* Space for the icon */
+            box-sizing: border-box;
+            font-size: 16px;
         }
 
+        /* Eye icon styling to position it inside the input field */
         .eye-icon {
             cursor: pointer;
             width: 20px;
             height: 20px;
             position: absolute;
             top: 50%;
-            right: 10px;
+            right: 15px; /* This places the icon on the far right inside the input */
             transform: translateY(-50%);
         }
 
@@ -78,7 +78,7 @@
             margin-left: 25%;
             color: white;
             border: none;
-            padding: 20px;
+            padding: 15px;
             width: 50%;
             border-radius: 25px;
             cursor: pointer;
@@ -162,6 +162,7 @@
             }
         }
     </style>
+
 </head>
 
 <body>
@@ -171,26 +172,31 @@
         <div class="left-section">
             <h2>Sign Up</h2>
             <form id="signupForm">
-                <input type="text" id="name" name="name" placeholder="Name" required>
-                <input type="email" id="email" name="email" placeholder="Email" required>
-                
-                <!-- Password Field for Signup -->
-                <div class="input-container">
-                    <input type="password" id="signupPassword" name="password" placeholder="Password" required>
-                    <!-- Password visibility toggle icons for signup -->
-                    <img src="password2.png" id="signupPasswordShow" class="eye-icon" alt="Show Password" onclick="togglePasswordVisibility('signupPassword', 'signupEyeIconShow', 'signupEyeIconHide')">
-                    <img src="password1.png" id="signupEyeIconHide" class="eye-icon" alt="Hide Password" style="display:none" onclick="togglePasswordVisibility('signupPassword', 'signupEyeIconShow', 'signupEyeIconHide')">
+                <div class="form-container">
+                    <div class="input-container">
+                        <input type="text" id="name" name="name" placeholder="Name" required>
+                    </div>
+
+                    <div class="input-container">
+                        <input type="email" id="email" name="email" placeholder="Email" required>
+                    </div>
+
+                    <div class="input-container">
+                        <input type="password" id="signupPassword" name="password" placeholder="Password" required>
+                        <!-- Password visibility toggle icons for signup -->
+                        <img src="password2.png" id="signupPasswordShow" class="eye-icon" alt="Show Password" onclick="togglePasswordVisibility('signupPassword', 'signupEyeIconShow', 'signupEyeIconHide')">
+                        <img src="password1.png" id="signupEyeIconHide" class="eye-icon" alt="Hide Password" style="display:none" onclick="togglePasswordVisibility('signupPassword', 'signupEyeIconShow', 'signupEyeIconHide')">
+                    </div>
+
+                    <div class="input-container">
+                        <input type="password" id="signupConfirmPassword" name="confirmpassword" placeholder="Confirm Password" required>
+                        <!-- Password visibility toggle icons for confirm password -->
+                        <img src="password2.png" id="signupConfirmPasswordShow" class="eye-icon" alt="Show Password" onclick="togglePasswordVisibility('signupConfirmPassword', 'signupConfirmEyeIconShow', 'signupConfirmEyeIconHide')">
+                        <img src="password1.png" id="signupConfirmEyeIconHide" class="eye-icon" alt="Hide Password" style="display:none" onclick="togglePasswordVisibility('signupConfirmPassword', 'signupConfirmEyeIconShow', 'signupConfirmEyeIconHide')">
+                    </div>
+
+                    <button type="submit" class="signup-btn">Sign Up</button>
                 </div>
-            
-                <!-- Confirm Password Field for Signup -->
-                <div class="input-container">
-                    <input type="password" id="signupConfirmPassword" name="confirmpassword" placeholder="Confirm Password" required>
-                    <!-- Password visibility toggle icons for confirm password -->
-                    <img src="password2.png" id="signupConfirmPasswordShow" class="eye-icon" alt="Show Password" onclick="togglePasswordVisibility('signupConfirmPassword', 'signupConfirmEyeIconShow', 'signupConfirmEyeIconHide')">
-                    <img src="password1.png" id="signupConfirmEyeIconHide" class="eye-icon" alt="Hide Password" style="display:none" onclick="togglePasswordVisibility('signupConfirmPassword', 'signupConfirmEyeIconShow', 'signupConfirmEyeIconHide')">
-                </div>
-            
-                <button type="submit" class="signup-btn">Sign Up</button>
             </form>
             <div class="signup-link">
                 <p>Already have an account? <a href="login.html"><u>LogIn Here</u></a></p>
@@ -228,42 +234,41 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const database = getFirestore(app);
-
     const signupForm = document.getElementById("signupForm");
-    signupForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
+signupForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-        const name = document.getElementById("name").value;
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("password").value;
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("signupPassword").value; // ID ని సరిదిద్దండి
 
-        try {
-            // Register user
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            const user = userCredential.user;
+    try {
+        // Register user
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
-            // Store user details in Firestore
-            await addDoc(collection(database, "studentdetails"), {
-                uid: user.uid,
-                name,
-                email,
-                password,
-                createdAt: new Date(),
-            });
+        const user = userCredential.user;
 
-            alert("Registration Successful!");
-        } catch (error) {
-            if (error.code === 'auth/email-already-in-use') {
-                alert('Email is already in use. Please use a different email.');
-            } else if (error.code === 'auth/invalid-email') {
-                alert('Invalid email address.');
-            } else if (error.code === 'auth/weak-password') {
-                alert('Weak password. Password must be at least 6 characters.');
-            } else {
-                alert('An error occurred: ' + error.message);
-            }
+        // Store user details in Firestore
+        await addDoc(collection(database, "studentdetails"), {
+            uid: user.uid,
+            name,
+            email,
+            createdAt: new Date(), // పాస్వర్డ్‌ను నిల్వ చేయడం మానుకోండి
+        });
+
+        alert("Registration Successful!");
+    } catch (error) {
+        if (error.code === 'auth/email-already-in-use') {
+            alert('Email is already in use. Please use a different email.');
+        } else if (error.code === 'auth/invalid-email') {
+            alert('Invalid email address.');
+        } else if (error.code === 'auth/weak-password') {
+            alert('Weak password. Password must be at least 6 characters.');
+        } else {
+            alert('An error occurred: ' + error.message);
         }
-    })
+    }
+});
 </script>
 <script src="password.js"></script>
 </body>
