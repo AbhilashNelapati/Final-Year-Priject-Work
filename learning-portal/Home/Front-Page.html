@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Management System</title>
+    <style>
+        /* General Reset and Layout */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: url('789.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            height: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Overlay for background */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Fixed Navbar */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #6A0DAD;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: orange;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 16px;
+            padding: 10px;
+        }
+
+        nav ul li a:hover {
+            background: orange;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        /* Content Section */
+        .content-section {
+            width: 100%;
+            margin-top: 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 150px; /* Added more space to the bottom */
+        }
+
+        /* Intro Section (Top 35%) */
+        .intro-section {
+            text-align: center;
+            margin-bottom: 5%;
+            width: 80%;
+            background-color: white;
+            border: 1px solid black;
+            padding: 20px;
+            color: black;
+        }
+
+        .intro-section h1 {
+            font-size: 40px;
+        }
+
+        .intro-section p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: orange;
+            color: white;
+            font-size: 18px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background: darkorange;
+        }
+
+        /* Features Section Container */
+        .features {
+            width: 80%;
+            margin-top: 30px;
+        }
+
+        /* Featured List Section */
+        .featured-list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 columns per row */
+            gap: 20px; /* Space between items */
+            margin-top: 30px;
+            width: 100%; /* Ensure the grid takes the full width */
+            justify-items: center; /* Center grid items */
+        }
+       
+        /* Container for the Featured List heading */
+        .new {
+            width: 100%; /* Ensure it takes full width */
+            text-align: center; /* Center the heading */
+            margin-bottom: 30px; /* Add margin below the heading */
+        }
+
+        /* Featured List Heading (centered) */
+        .new h2 {
+            font-size: 32px;
+            color: black;
+            text-align: center; /* Ensure heading is centered */
+            margin-bottom: 20px; /* Add gap between heading and course boxes */
+        }
+
+        /* Course Box Style */
+        .course-box {
+            background-color: white;
+            color: black;
+            padding: 15px;
+            text-align: center;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Set box-shadow */
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+            margin: 10px;
+            border: 2px solid silver;
+        }
+
+        .course-box:hover {
+            background-color: orange;
+        }
+
+        .course-image {
+            width: 80%;
+            max-width: 180px;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .course-box h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .course-box p {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        /* Additional Info Section (Initially at the bottom) */
+        .additional-info {
+            background: rgba(0, 0, 0, 0.745);
+            padding: 20px;
+            text-align: center;
+            z-index: 5;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .additional-info h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .additional-info p {
+            font-size: 16px;
+        }
+
+        /* Sticky Additional Info Section */
+        .additional-info.sticky {
+            position: fixed;
+            bottom: 0;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 1024px) {
+            .featured-list {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns for medium screens */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .featured-list {
+                grid-template-columns: 1fr; /* 1 column for small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="overlay"></div>
+
+    <header>
+        <div class="logo"> <span>Learning Management System</span></div>
+        <nav>
+            <ul>
+                <li><a href="C:\Users\scet2\OneDrive\Desktop\Final-Year-Project-Work-master\LogIn\signup.html">Signup</a></li>
+                <li><a href="C:\Users\scet2\OneDrive\Desktop\Final-Year-Project-Work-master\LogIn\login.html">Login</a></li>
+                <li><a href="#">Courses</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Feedback</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="content-section">
+        <!-- Intro Section (Top 35%) -->
+        <div class="intro-section">
+            <h1>Welcome to LMS</h1>
+            <p>Learn and Implement</p>
+            <a href="#" class="btn">Get Started</a>
+        </div>
+
+        <!-- Features Container -->
+        <div class="features">
+            <!-- Featured List Section -->
+            <div class="new">
+                <h2>Featured List</h2>
+            </div>
+
+            <div class="featured-list">
+                <div class="course-box">
+                    <img src="CoursesImages/thumb-1.png" alt="HTML" class="course-image">
+                    <h3>HTML</h3>
+                    <p>Learn the fundamentals of web page structure with HTML.</p>
+                </div>
+                <div class="course-box">
+                    <img src="CoursesImages/thumb-2.png" alt="CSS" class="course-image">
+                    <h3>CSS</h3>
+                    <p>Style your web pages and create stunning designs with CSS.</p>
+                </div>
+                <div class="course-box">
+                    <img src="CoursesImages/thumb-3.png" alt="JavaScript" class="course-image">
+                    <h3>JavaScript</h3>
+                    <p>Learn dynamic programming and interactivity with JavaScript.</p>
+                </div>
+                <div class="course-box">
+                    <img src="CoursesImages/thumb-4.png" alt="Bootstrap" class="course-image">
+                    <h3>Bootstrap</h3>
+                    <p>Build responsive websites with the popular Bootstrap framework.</p>
+                </div>
+                <div class="course-box">
+                    <img src="CoursesImages/thumb-5.png" alt="JQuery" class="course-image">
+                    <h3>JQuery</h3>
+                    <p>Enhance your website with interactive features using JQuery.</p>
+                </div>
+                <div class="course-box">
+                    <img src="CoursesImages/thumb-6.png" alt="SaaS" class="course-image">
+                    <h3>SaaS</h3>
+                    <p>Learn the fundamentals of Software as a Service (SaaS) development.</p>
+                </div>
+                <div class="course-box">
+                    <img src="CoursesImages/thumb-7.png" alt="PHP" class="course-image">
+                    <h3>PHP</h3>
+                    <p>Master server-side scripting with PHP and dynamic web pages.</p>
+                </div>
+                <div class="course-box">
+                    <img src="CoursesImages/thumb-8.png" alt="MySQL" class="course-image">
+                    <h3>MySQL</h3>
+                    <p>Learn how to manage databases and SQL queries with MySQL.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Info Section (Initially at the bottom) -->
+        <div class="additional-info">
+            <h2>Contact Us</h2>
+            <p>Email: contact@lms.com</p>
+            <p>Phone: +1234567890</p>
+            <p>Location: Online</p>
+        </div>
+    </div>
+
+    <script>
+        // Check for scroll and apply sticky behavior
+        window.addEventListener("scroll", function() {
+            var additionalInfo = document.querySelector(".additional-info");
+            if (window.scrollY + window.innerHeight >= document.body.scrollHeight) {
+                additionalInfo.classList.add("sticky");
+            } else {
+                additionalInfo.classList.remove("sticky");
+            }
+        });
+    </script>
+
+</body>
+</html>
