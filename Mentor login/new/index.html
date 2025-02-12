@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset and Layout */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background: url('789.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            height: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Overlay for background */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Dark overlay for better text visibility */
+        }
+
+        /* Fixed Navbar */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(106, 13, 173, 0.8); /* Semi-transparent background */
+            z-index: 10;
+            transition: background-color 0.3s ease; /* Smooth transition */
+        }
+
+        header:hover {
+            background-color: rgba(106, 13, 173, 1); /* Full color on hover */
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: orange;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 16px;
+            padding: 10px;
+            transition: background 0.3s, color 0.3s; /* Smooth transition */
+        }
+
+        nav ul li a:hover {
+            background: orange;
+            border-radius: 5px;
+            padding: 10px;
+            color: black; /* Change text color on hover */
+        }
+
+        /* Content Section */
+        .content-section {
+            width: 100%;
+            margin-top: 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 150px; /* Added more space to the bottom */
+        }
+
+        /* Intro Section */
+        .intro-section {
+            text-align: center;
+            margin-bottom: 5%;
+            width: 80%;
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+            border-radius: 10px;
+            padding: 20px;
+            color: black;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Soft shadow */
+        }
+
+        .intro-section h1 {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .intro-section p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: orange;
+            color: white;
+            font-size: 18px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.3s; /* Smooth transition */
+        }
+
+        .btn:hover {
+            background: darkorange;
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+
+        /* Features Section Container */
+        .features {
+            width: 80%;
+            margin-top: 30px;
+        }
+
+        /* Featured List Section */
+        .featured-list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 columns per row */
+            gap: 20px; /* Space between items */
+            margin-top: 30px;
+            width: 100%; /* Ensure the grid takes the full width */
+            justify-items: center; /* Center grid items */
+        }
+
+        /* Container for the Featured List heading */
+        .new {
+            width: 100%; /* Ensure it takes full width */
+            text-align: center; /* Center the heading */
+            margin-bottom: 30px; /* Add margin below the heading */
+        }
+
+        /* Featured List Heading */
+        .new h2 {
+            font-size: 32px;
+            color: black;
+            margin-bottom: 20px; /* Add gap between heading and course boxes */
+        }
+
+        /* Course Box Style */
+        .course-box {
+            background-color: white;
+            color: black;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Set box-shadow */
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+            cursor: pointer;
+            margin: 10px;
+            border: 2px solid silver;
+        }
+
+        .course-box:hover {
+            background-color: orange;
+            transform: translateY(-5px); /* Lift effect on hover */
+        }
+
+        .course-image {
+            width: 80%;
+            max-width: 180px;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .course-box h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .course-box p {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+
+
+        /* Additional Info Section */
+        .additional-info {
+            background: rgba(0, 0, 0, 0.745);
+            padding: 20px;
+            text-align: center;
+            z-index: 5;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: 30px; /* Add margin above */
+            border-radius: 10px; /* Rounded corners */
+        }
+
+        .additional-info h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .additional-info p {
+            font-size: 16px;
+        }
+
+        /* User Dropdown */
+        #user-options {
+            position: absolute;
+            display: none; /* Hide initially */
+            background-color: white;
+            padding: 0;
+            border: 1px solid #ccc;
+            z-index: 15;
+            border-radius: 5px;
+            width: 120px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            opacity: 0;
+            transform: translateY(-10px); /* Make it slide in */
+        }
+
+        #user-options button {
+            padding: 10px;
+            background-color: white;
+            color: black;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: color 0.3s, background-color 0.3s;
+        }
+
+        #user-options button:hover {
+            background-color: orange;
+            color: white;
+        }
+
+        #user-box {
+            cursor: pointer;
+            background-color: #6A0DAD;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background 0.3s; /* Smooth transition */
+        }
+
+        #user-box:hover {
+            background-color: orange;
+        }
+        
+        @keyframes slideCourses {
+            0% { transform: translateX(-100%); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        .course-box {
+            animation: slideCourses 0.8s ease-in-out;
+        }
+        /* Responsive Adjustments */
+        @media (max-width: 1024px) {
+            .featured-list {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns for medium screens */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .featured-list {
+                grid-template-columns: 1fr; /* 1 column for small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="overlay"></div>
+
+    <header>
+        <div class="logo"> <span>Learning Management System</span></div>
+        <nav>
+            <ul>
+                <li><a href="#" id="user-box">User </a></li>
+                <li><a href="#">Courses</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Feedback</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- User Dropdown -->
+    <div id="user-options">
+        <button onclick="redirectToPage('student')">Student</button>
+        <button onclick="redirectToPage('mentor')">Mentor</button>
+    </div>
+
+    <div class="content-section">
+        <!-- Intro Section -->
+        <div class="intro-section">
+            <h1>Welcome to LMS</h1>
+            <p>Learn and Implement</p>
+            <button class="btn" onclick="window.location.href='../LogIn/signup.html'">Get Started</button>
+        </div>
+
+        <!-- Features Container -->
+        <div class="features">
+            <!-- Featured List Section -->
+            <div class="new">
+                <h2>Featured List</h2>
+            </div>
+
+            <div class="featured-list">
+                <div class="course-box">
+                    <img src="CoursesImages/thumb-1.png" alt="HTML" class="course-image">
+                    <h3>HTML</h3>
+                    <p>Learn the fundamentals of web page structure with HTML.</p>
+                </div>
+                <div class="course-box">
+                    <img src="CoursesImages/thumb-2.png" alt="CSS" class="course-image">
+                    <h3>CSS</h3>
+                    <p>Style your web pages and create stunning designs with CSS.</p>
+                </div>
+                <div class="course-box">
+                    <img src="CoursesImages/thumb-3.png" alt="JavaScript" class="course-image">
+                    <h3>JavaScript</h3>
+                    <p>Learn dynamic programming and interactivity with JavaScript.</p>
+                </div>
+                <div class="course-box">
+                    <img src="CoursesImages/thumb-4.png" alt="Bootstrap" class="course-image">
+                    <h3>Bootstrap</h3>
+                    <p>Build responsive websites with the popular Bootstrap framework.</p>
+                </div>
+                <div class="course-box">
+                    <img src="CoursesImages/thumb-5.png" alt="JQuery" class="course-image">
+                    <h3>JQuery</h3>
+                    <p>Enhance your website with interactive features using JQuery.</p>
+                </div>
+                <div class="course-box">
+                    <img src="CoursesImages/thumb-6.png" alt="SaaS" class="course-image">
+                    <h3>SaaS</h3>
+                    <p>Learn the fundamentals of Software as a Service (SaaS) development.</p>
+                </div>
+                <div class="course-box">
+                    <img src="CoursesImages/thumb-7.png" alt="PHP" class="course-image">
+                    <h3>PHP</h3>
+                    <p>Master server-side scripting with PHP and dynamic web pages.</p>
+                </div>
+                <div class="course-box">
+                    <img src="CoursesImages/thumb-8.png" alt="MySQL" class="course-image">
+                    <h3>MySQL</h3>
+                    <p>Learn how to manage databases and SQL queries with MySQL.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Info Section -->
+        <div class="additional-info">
+            <h2>Contact Us</h2>
+            <p>Email: contact@lms.com</p>
+            <p>Phone: +1234567890</p>
+            <p>Location: Online</p>
+        </div>
+    </div>
+
+    <script>
+        // Toggle visibility of user options when clicking "User "
+        document.getElementById("user-box").addEventListener("click", function() {
+            var options = document.getElementById("user-options");
+            
+            // Get the position of the "User " button
+            var buttonRect = document.getElementById("user-box").getBoundingClientRect();
+            
+            // Position the dropdown below the button
+            options.style.left = buttonRect.left + "px"; // Align left
+            options.style.top = buttonRect.bottom + "px"; // Position just below the button
+            
+            // Toggle visibility with smooth animation
+            if (options.style.display === "block") {
+                options.style.display = "none";
+                options.style.opacity = "0";
+                options.style.transform = "translateY(-10px)";
+            } else {
+                options.style.display = "block";
+                options.style.opacity = "1";
+                options.style.transform = "translateY(0)";
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const courses = document.querySelectorAll('.course-box');
+
+            function animateCourses() {
+                courses.forEach((course, index) => {
+                    setTimeout(() => {
+                        course.style.animation = `slideCourses 0.8s ease-in-out forwards`;
+                    }, index * 200); // Each box moves with a delay
+                });
+            }
+
+            animateCourses();
+        });
+
+
+        // Redirect to the corresponding page based on role
+        function redirectToPage(role) {
+            if (role === 'student') {
+                window.location.href = "C:\\Users\\scet2\\OneDrive\\Desktop\\Final-Year-Project-Work-master\\LogIn\\signup.html"; // Student signup page
+            } else if (role === 'mentor') {
+                window.location.href = "C:\\Users\\scet2\\OneDrive\\Desktop\\Final-Year-Project-Work-master\\LogIn\\login.html"; // Mentor login page
+            }
+        }
+
+    </script>
+
+</body>
+</html>
