@@ -151,28 +151,39 @@
             margin-bottom: 20px; /* Add gap between heading and course boxes */
         }
 
-        /* Course Box Style */
+        .courses-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
         .course-box {
             background-color: white;
             color: black;
-            padding: 15px;
+            padding: 20px;
             text-align: center;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Set box-shadow */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             height: 250px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            transition: background-color 0.3s ease;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transition */
             cursor: pointer;
             margin: 10px;
             border: 2px solid silver;
+            perspective: 1000px; /* Depth effect */
         }
 
         .course-box:hover {
+            transform: translateZ(15px); /* Moves slightly forward */
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6); /* More depth on hover */
             background-color: orange;
         }
+
 
         .course-image {
             width: 80%;
@@ -218,6 +229,87 @@
             bottom: 0;
         }
 
+        #getStartedBtn {
+            cursor: pointer; /* This will ensure the cursor changes to hand */
+        }
+
+        /* Styling the button to look more interactive */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: orange;
+            color: white;
+            font-size: 18px;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer; /* Make sure it shows the hand cursor */
+        }
+
+        .btn:hover {
+            background: darkorange;
+        }
+
+        /* User Box */
+        #user-box {
+            cursor: pointer;
+            background-color: #6A0DAD;
+            padding: 10px 15px;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            position: relative;
+        }
+
+        #user-box:hover {
+            background-color: orange;
+        }
+
+        /* Dropdown */
+        #user-options {
+            position: absolute;
+            display: none;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px;
+            top:10px;
+            right: 0;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        #user-options button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background: white;
+            cursor: pointer;
+            text-align: left;
+            font-size: 16px;
+            color: black;
+            transition: 0.3s;
+        }
+
+        #user-options button:hover {
+            background-color: orange;
+            color: white;
+        }
+
+        /* Positioning */
+        .user-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        @keyframes slideCourses {
+            0% { transform: translateX(-100%); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        .course-box {
+            animation: slideCourses 0.8s ease-in-out;
+        }
+
+
         /* Responsive Adjustments */
         @media (max-width: 1024px) {
             .featured-list {
@@ -240,8 +332,7 @@
         <div class="logo"> <span>Learning Management System</span></div>
         <nav>
             <ul>
-                <li><a href="C:\Users\scet2\OneDrive\Desktop\Final-Year-Project-Work-master\LogIn\signup.html">Signup</a></li>
-                <li><a href="C:\Users\scet2\OneDrive\Desktop\Final-Year-Project-Work-master\LogIn\login.html">Login</a></li>
+                <li><a href="#" id="user-box">User</a></li>
                 <li><a href="#">Courses</a></li>
                 <li><a href="#">Features</a></li>
                 <li><a href="#">Contact</a></li>
@@ -250,13 +341,22 @@
         </nav>
     </header>
 
+        <!-- User Dropdown -->
+        <div id="user-options">
+            <button onclick="redirectToPage('student')">Student</button>
+            <button onclick="redirectToPage('mentor')">Mentor</button>
+        </div>
+
     <div class="content-section">
         <!-- Intro Section (Top 35%) -->
         <div class="intro-section">
             <h1>Welcome to LMS</h1>
             <p>Learn and Implement</p>
-            <a href="#" class="btn">Get Started</a>
+            <button class="btn" onclick="window.location.href='../LogIn/signup.html'">Get Started</button>
+
+
         </div>
+
 
         <!-- Features Container -->
         <div class="features">
@@ -267,42 +367,42 @@
 
             <div class="featured-list">
                 <div class="course-box">
-                    <img src="CoursesImages/thumb-1.png" alt="HTML" class="course-image">
+                    <img src="CoursesImages\thumb-1.png" alt="HTML" class="course-image">
                     <h3>HTML</h3>
                     <p>Learn the fundamentals of web page structure with HTML.</p>
                 </div>
                 <div class="course-box">
-                    <img src="CoursesImages/thumb-2.png" alt="CSS" class="course-image">
+                    <img src="CoursesImages\thumb-2.png" alt="CSS" class="course-image">
                     <h3>CSS</h3>
                     <p>Style your web pages and create stunning designs with CSS.</p>
                 </div>
                 <div class="course-box">
-                    <img src="CoursesImages/thumb-3.png" alt="JavaScript" class="course-image">
+                    <img src="CoursesImages\thumb-3.png" alt="JavaScript" class="course-image">
                     <h3>JavaScript</h3>
                     <p>Learn dynamic programming and interactivity with JavaScript.</p>
                 </div>
                 <div class="course-box">
-                    <img src="CoursesImages/thumb-4.png" alt="Bootstrap" class="course-image">
+                    <img src="CoursesImages\thumb-4.png" alt="Bootstrap" class="course-image">
                     <h3>Bootstrap</h3>
                     <p>Build responsive websites with the popular Bootstrap framework.</p>
                 </div>
                 <div class="course-box">
-                    <img src="CoursesImages/thumb-5.png" alt="JQuery" class="course-image">
+                    <img src="CoursesImages\thumb-5.png" alt="JQuery" class="course-image">
                     <h3>JQuery</h3>
                     <p>Enhance your website with interactive features using JQuery.</p>
                 </div>
                 <div class="course-box">
-                    <img src="CoursesImages/thumb-6.png" alt="SaaS" class="course-image">
+                    <img src="CoursesImages\thumb-6.png" alt="SaaS" class="course-image">
                     <h3>SaaS</h3>
                     <p>Learn the fundamentals of Software as a Service (SaaS) development.</p>
                 </div>
                 <div class="course-box">
-                    <img src="CoursesImages/thumb-7.png" alt="PHP" class="course-image">
+                    <img src="CoursesImages\thumb-7.png" alt="PHP" class="course-image">
                     <h3>PHP</h3>
                     <p>Master server-side scripting with PHP and dynamic web pages.</p>
                 </div>
                 <div class="course-box">
-                    <img src="CoursesImages/thumb-8.png" alt="MySQL" class="course-image">
+                    <img src="CoursesImages\thumb-8.png" alt="MySQL" class="course-image">
                     <h3>MySQL</h3>
                     <p>Learn how to manage databases and SQL queries with MySQL.</p>
                 </div>
@@ -319,15 +419,56 @@
     </div>
 
     <script>
-        // Check for scroll and apply sticky behavior
-        window.addEventListener("scroll", function() {
-            var additionalInfo = document.querySelector(".additional-info");
-            if (window.scrollY + window.innerHeight >= document.body.scrollHeight) {
-                additionalInfo.classList.add("sticky");
+
+        // Toggle visibility of user options when clicking "User"
+            // Toggle visibility of user options when clicking "User"
+        document.getElementById("user-box").addEventListener("click", function() {
+            var options = document.getElementById("user-options");
+            
+            // Get the position of the "User" button
+            var buttonRect = document.getElementById("user-box").getBoundingClientRect();
+            
+            // Position the dropdown below the button
+            options.style.left = buttonRect.left + "px"; // Align left
+            options.style.top = buttonRect.bottom + "px"; // Position just below the button
+            
+            // Toggle visibility with smooth animation
+            if (options.style.display === "block") {
+                options.style.display = "none";
+                options.style.opacity = "0";
+                options.style.transform = "translateY(-10px)";
             } else {
-                additionalInfo.classList.remove("sticky");
+                options.style.display = "block";
+                options.style.opacity = "1";
+                options.style.transform = "translateY(0)";
             }
         });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const courses = document.querySelectorAll('.course-box');
+
+            function animateCourses() {
+                courses.forEach((course, index) => {
+                    setTimeout(() => {
+                        course.style.animation = `slideCourses 0.8s ease-in-out forwards`;
+                    }, index * 200); // Each box moves with a delay
+                });
+            }
+
+            animateCourses();
+        });
+
+
+
+        // Redirect to the corresponding page based on role
+        function redirectToPage(role) {
+            if (role === 'student') {
+                window.location.href = "C:\\Users\\scet2\\OneDrive\\Desktop\\Final-Year-Project-Work-master\\LogIn\\login.html"; // Student signup page
+            } else if (role === 'mentor') {
+                window.location.href = "C:\\Users\\scet2\\OneDrive\\Desktop\\Final-Year-Project-Work-master\\Mentor login\\Mentor_Login.html"; // Mentor login page
+            }
+        }
+
     </script>
 
 </body>
