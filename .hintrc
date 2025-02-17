@@ -8,6 +8,11 @@
       {
         "button-name": "off"
       }
+<<<<<<< HEAD
     ]
+=======
+    ],
+    "button-type": "off"
+>>>>>>> 5be33397 (Upload files to Final-Year-Project-Work)
   }
 }
